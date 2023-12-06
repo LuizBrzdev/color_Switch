@@ -1,11 +1,10 @@
-import 'dart:ui';
-
-import 'package:backgroud_rgb/src/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/home_controller.dart';
+
 class HomePage extends GetView<HomeController> {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +44,7 @@ class HomePage extends GetView<HomeController> {
                         height: 20,
                       ),
                       Text(
-                        //'HEX: #${controller.argbToHex} ',
-                        controller.colorText + controller.hexAndRgbValue,
+                        controller.colorText + controller.hexAndRgbToString,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
@@ -61,44 +59,44 @@ class HomePage extends GetView<HomeController> {
             const SizedBox(
               height: 20,
             ),
-            Slider(
-              autofocus: true,
-              min: 0,
-              value: controller.rColor,
-              max: 255,
-              activeColor: Colors.redAccent,
-              label: 'R',
-              onChanged: (double r) {
-                controller.changeRSlider(r);
-              },
+            Obx(
+              () => Slider(
+                autofocus: true,
+                min: 0,
+                value: controller.rColor,
+                max: 255,
+                activeColor: Colors.redAccent,
+                label: 'R',
+                onChanged: (double sliderValue) => controller.rColor = sliderValue,
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Slider(
-              autofocus: true,
-              min: 0,
-              value: controller.gColor,
-              activeColor: Colors.green,
-              max: 255,
-              label: 'G',
-              onChanged: (double g) {
-                controller.changeGSlider(g);
-              },
+            Obx(
+              () => Slider(
+                autofocus: true,
+                min: 0,
+                value: controller.gColor,
+                activeColor: Colors.green,
+                max: 255,
+                label: 'G',
+                onChanged: (double sliderValue) => controller.gColor = sliderValue,
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Slider(
-              autofocus: true,
-              min: 0,
-              value: controller.bColor,
-              activeColor: Colors.blueAccent,
-              max: 255,
-              label: 'B',
-              onChanged: (double b) {
-                controller.changeBSlider(b);
-              },
+            Obx(
+              () => Slider(
+                autofocus: true,
+                min: 0,
+                value: controller.bColor,
+                activeColor: Colors.blueAccent,
+                max: 255,
+                label: 'B',
+                onChanged: (double sliderValue) => controller.bColor = sliderValue,
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -110,7 +108,7 @@ class HomePage extends GetView<HomeController> {
               autofocus: true,
               splashColor: Colors.purple,
               canRequestFocus: true,
-              onTap: () => controller.boolchange(),
+              onTap: () => controller.changeButtonTextToRgbOrHex(),
               child: SizedBox(
                 width: 100,
                 height: 100,

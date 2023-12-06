@@ -1,5 +1,6 @@
-import 'package:backgroud_rgb/src/controllers/home_controller.dart';
 import 'package:get/get.dart';
+
+import '../controllers/home_controller.dart';
 
 class InitBindings implements Bindings {
   @override
